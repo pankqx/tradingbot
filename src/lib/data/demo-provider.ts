@@ -145,7 +145,9 @@ function generate(sc: Scenario): Candle[] {
     }
   }
   // Rescale so each series ends at its configured level (sc.base = final close).
-  const k = sc.base / candles[candles.length - 1].close;
+  // Nudge the end level by a seeded fraction so simulated levels are not suspiciously round.
+  const target = sc.base * (1 + ((sc.seed * 7919) % 97) / 10000);
+  const k = target / candles[candles.length - 1].close;
   return candles.map((c) => ({
     ...c,
     open: round(c.open * k), high: round(c.high * k), low: round(c.low * k), close: round(c.close * k),

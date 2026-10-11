@@ -34,7 +34,11 @@ describe("rsi", () => {
     expect(rsi(down)[39]).toBeCloseTo(0, 5);
   });
   it("stays within 0..100", () => {
-    for (const v of rsi(close)) if (v != null) expect(v).toBeGreaterThanOrEqual(0), expect(v).toBeLessThanOrEqual(100);
+    for (const v of rsi(close)) {
+      if (v == null) continue;
+      expect(v).toBeGreaterThanOrEqual(0);
+      expect(v).toBeLessThanOrEqual(100);
+    }
   });
 });
 
