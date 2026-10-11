@@ -326,16 +326,16 @@ export function replaySignals(ctx: Context, lookback = 100): SignalRecord[] {
   const out: SignalRecord[] = [];
   const last = ctx.candles.length - 1;
   let prevKey = "";
-  let lastEmitted: SignalRecord | null = null;
+  const state: { last: SignalRecord | null } = { last: null };
   for (let i = Math.max(MIN_BARS - 1, last - lookback); i <= last; i++) {
     const comp = compose(ctx, i);
     const key = comp.primary ? `${comp.primary.meta.id}:${comp.status}` : "";
     if (comp.primary && key !== prevKey) {
       // Cooldown: do not re-announce the same direction within 5 bars of the previous signal.
-      const prior: SignalRecord | null = lastEmitted;
+      const prior = state.last;
       const cooling: boolean = prior != null && prior.direction === comp.status && i - prior.barIndex < 5;
       const s: SignalRecord | null = cooling ? null : buildSignal(ctx, i, comp);
-      if (s) { out.push(s); lastEmitted = s; }
+      if (s) { out.push(s); state.last = s; }
     }
     prevKey = key;
   }
