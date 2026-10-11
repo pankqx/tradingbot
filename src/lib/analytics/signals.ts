@@ -5,6 +5,7 @@
 import {
   adx, atr, bollinger, ema, macd, priorHighest, priorLowest, relativeVolume, rollingPercentile, rsi, sma,
 } from "./indicators";
+import { shortDate } from "@/lib/format";
 import type {
   Candle, Direction, Evidence, Regime, Series, SignalOutcome, SignalRecord, StrategyMeta, TargetLevel,
 } from "./types";
@@ -286,7 +287,7 @@ export function buildSignal(ctx: Context, i: number, comp: Composition): SignalR
       macdHist: v(ctx.macdHist, i)!, adx14: v(ctx.adx14, i)!, atr14: atrV, relVol: v(ctx.relVol, i)!,
     },
     entryRef: entry,
-    entryNote: `Reference is the ${date} close. A real entry would be decided on a later bar; slippage is not included.`,
+    entryNote: `Reference is the ${shortDate(date, true)} close. A real entry would be decided on a later bar; slippage is not included.`,
     stop, targets, horizonBars: horizon, expiresOn, riskReward: rr, strength: p.strength,
     supporting, conflicting, barIndex: i,
     outcome: { status: "active", barsEvaluated: 0, resolvedOn: null, directionalMovePct: 0 },

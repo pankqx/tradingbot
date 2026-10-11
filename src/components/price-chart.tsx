@@ -78,9 +78,9 @@ function makePrimitive(setup: ChartSetup, c: Palette): ISeriesPrimitive<Time> {
                 ctx.fillStyle = color; ctx.font = `${11 * hr}px "IBM Plex Sans", sans-serif`; ctx.textBaseline = "bottom";
                 ctx.fillText(label, x0 + 8 * hr, y * vr - 4 * vr);
               };
-              line(yE, c.warn, [], `Entry reference ${price(setup.entry)}`);
-              line(yS, c.down, [5, 4], `Stop ${price(setup.stop)}`);
-              setup.targets.forEach((t) => { const y = series!.priceToCoordinate(t.price); if (y != null) line(y, c.up, [5, 4], `${t.label} ${price(t.price)}`); });
+              line(yE, c.warn, [], "Entry reference");
+              line(yS, c.down, [5, 4], "Stop");
+              setup.targets.forEach((t) => { const y = series!.priceToCoordinate(t.price); if (y != null) line(y, c.up, [5, 4], t.label); });
             });
           },
         }),
@@ -114,7 +114,7 @@ export function PriceChart({ candles, ind, setup, markers = [], symbol }: { cand
         layout: { background: { color: "transparent" }, textColor: c.text, fontFamily: '"IBM Plex Sans", sans-serif', fontSize: 12, panes: { separatorColor: c.line, separatorHoverColor: alpha(c.accent, 0.3) } },
         grid: { vertLines: { visible: false }, horzLines: { color: c.grid } },
         rightPriceScale: { borderVisible: false, scaleMargins: { top: 0.08, bottom: 0.04 } },
-        timeScale: { borderVisible: false, timeVisible: false, rightOffset: 8, minBarSpacing: 3 },
+        timeScale: { borderVisible: false, timeVisible: false, rightOffset: setup ? 28 : 8, minBarSpacing: 3 },
         crosshair: { mode: CrosshairMode.Normal, vertLine: { color: c.cross, width: 1, style: LineStyle.Dashed, labelBackgroundColor: c.ink }, horzLine: { color: c.cross, width: 1, style: LineStyle.Dashed, labelBackgroundColor: c.ink } },
       });
       chartRef.current = chart;
@@ -182,7 +182,7 @@ export function PriceChart({ candles, ind, setup, markers = [], symbol }: { cand
 
       const n = candles.length;
       const saved = rangeRef.current;
-      chart.timeScale().setVisibleLogicalRange(saved ?? { from: n - 126, to: n + 8 });
+      chart.timeScale().setVisibleLogicalRange(saved ?? { from: n - 118, to: n + (setup ? 28 : 8) });
       chart.timeScale().subscribeVisibleLogicalRangeChange((r) => { if (r) rangeRef.current = r; });
       queueMicrotask(() => setError(null));
     } catch (e) {
@@ -195,7 +195,7 @@ export function PriceChart({ candles, ind, setup, markers = [], symbol }: { cand
 
   const setRange = (bars: number) => {
     const n = candles.length;
-    const r = { from: Math.max(-2, n - Math.min(bars, n)), to: n + 8 } as unknown as LogicalRange;
+    const r = { from: Math.max(-2, n - Math.min(bars, n)), to: n + (setup ? 28 : 8) } as unknown as LogicalRange;
     rangeRef.current = r;
     chartRef.current?.timeScale().setVisibleLogicalRange(r);
   };

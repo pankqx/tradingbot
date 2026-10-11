@@ -39,7 +39,7 @@ export function ResearchQueue({ rows, title = "Research queue", compact = false 
   const counts = useMemo(() => ({ bullish: rows.filter((r) => r.status === "bullish").length, bearish: rows.filter((r) => r.status === "bearish").length }), [rows]);
 
   return (
-    <section aria-labelledby="queue-h">
+    <section aria-labelledby="queue-h" className="min-w-0">
       <div className="flex flex-wrap items-end justify-between gap-x-6 gap-y-3 border-b border-line pb-3">
         <div>
           <h2 id="queue-h" className="text-[15px] font-semibold">{title}</h2>

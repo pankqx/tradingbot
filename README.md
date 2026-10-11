@@ -1,36 +1,37 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# tradingb0t
 
-## Getting Started
+Explainable stock research and rule-based trading signals for Indian markets. An academic (MCA) prototype built to startup-quality standards.
 
-First, run the development server:
+> **All market data in this build is simulated.** Prices come from a deterministic generator, not an exchange. Signals are research hypotheses, not investment advice, and nothing here predicts returns.
+
+## What works today (vertical slice)
+
+| Area | Status |
+| --- | --- |
+| App shell: sidebar, ⌘K search, theme toggle (light / dark / system, no flash), responsive nav | Working |
+| Overview: simulated index tape, ranked research queue, breadth, recently invalidated setups | Working |
+| Discover: filterable, sortable, paginated screener with saved filters and a local watchlist | Working |
+| Stock page: candlestick chart, SMA / Bollinger / volume / RSI / MACD, setup drawn on chart, score breakdown | Working |
+| Signals: four rule-based strategies, regime classification, ledger with outcomes, signal detail page | Working |
+| Methodology page generated from the same constants the engine uses | Working |
+| Onboarding, persistence, backtesting, paper trading, academy, journal | Not built yet (see `TASKS.md`) |
+
+## Run it
+
+Requires Node 20.19+ (tested on 22).
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install --legacy-peer-deps
+npm run dev          # http://localhost:3000
+npm test             # indicator + signal engine tests
+npm run build && npm start
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+No API keys are needed. See `.env.example` for the variables a live provider will use.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Docs
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) · [`docs/SIGNAL_METHODOLOGY.md`](docs/SIGNAL_METHODOLOGY.md) · [`docs/DESIGN_SYSTEM.md`](docs/DESIGN_SYSTEM.md)
+- [`docs/DATA_SOURCES.md`](docs/DATA_SOURCES.md) · [`docs/PRODUCT_SPEC.md`](docs/PRODUCT_SPEC.md) · [`docs/ACADEMIC_REPORT.md`](docs/ACADEMIC_REPORT.md)
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Charts by [TradingView Lightweight Charts™](https://www.tradingview.com/lightweight-charts/) (Apache-2.0; attribution is kept visible).

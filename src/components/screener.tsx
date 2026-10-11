@@ -123,7 +123,7 @@ export function Screener({ rows }: { rows: ScreenerRow[] }) {
         </div>
       </aside>
 
-      <section aria-label="Results">
+      <section aria-label="Results" className="min-w-0">
         <p className="border-b border-line pb-2.5 text-[13.5px] text-ink-2"><span className="num font-medium text-ink">{out.length}</span> of {rows.length} instruments match</p>
         {slice.length === 0 ? <EmptyState title="No instruments match" body="These filters are too tight for this universe. Reset them or widen one range." action={<button onClick={() => { setF(EMPTY); setPage(0); }} className="mt-1 rounded-full bg-ink px-4 py-1.5 text-[13.5px] text-paper">Reset filters</button>} /> : (
           <div className="overflow-x-auto">
