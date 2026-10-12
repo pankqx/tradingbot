@@ -8,6 +8,8 @@ import { regimeLabel, STRATEGIES, classifyRegime } from "@/lib/analytics/signals
 import { allHistory, findSignal, getUniverse } from "@/lib/data/universe";
 import { OUTCOME_LABEL, price, shortDate } from "@/lib/format";
 
+export const dynamicParams = false;
+
 export function generateStaticParams() {
   const u = getUniverse();
   const ids = new Set<string>();

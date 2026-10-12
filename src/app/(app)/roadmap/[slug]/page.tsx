@@ -11,6 +11,8 @@ const ITEMS: Record<string, { title: string; milestone: string; body: string; in
   settings: { title: "Settings", milestone: "Milestone 2", body: "Your research profile: experience, objectives, risk limits and preferred sectors, collected in a short onboarding.", includes: ["Onboarding", "Editable profile", "Screener defaults from your answers"] },
 };
 
+export const dynamicParams = false;
+
 export function generateStaticParams() { return Object.keys(ITEMS).map((slug) => ({ slug })); }
 
 export async function generateMetadata({ params }: PageProps<"/roadmap/[slug]">) {

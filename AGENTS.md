@@ -28,7 +28,7 @@ Currently runs on **simulated** data only. Honesty is a product requirement, not
 - Design tokens are CSS variables in `src/app/globals.css` (light and dark are separate, complete sets). Use the Tailwind aliases (`bg-surface`, `text-ink-2`, `text-up`...) and never hard-code colours.
 
 ## Commands
-`npm run dev` · `npm test` · `npm run typecheck` · `npm run lint` · `npm run build`
+`npm run dev` · `npm test` · `npm run typecheck` · `npm run lint` · `npm run build` · `npm run build:pages` (static export for GitHub Pages; Cache Components cannot be enabled because export needs no Node server)
 
 ## Workflow
 Small commits, using the repository owner's git identity. Do not add co-author trailers. Run tests, typecheck and lint before committing.

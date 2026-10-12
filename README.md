@@ -18,16 +18,25 @@ Explainable stock research and rule-based trading signals for Indian markets. An
 
 ## Run it
 
-Requires Node 20.19+ (tested on 22).
+Requires Node 20.19+ (tested on 22). No API keys are needed.
 
 ```bash
-npm install --legacy-peer-deps
-npm run dev          # http://localhost:3000
-npm test             # indicator + signal engine tests
-npm run build && npm start
+git clone https://github.com/pankqx/tradingbot.git
+cd tradingbot
+npm install
+npm run dev            # http://localhost:3000
 ```
 
-No API keys are needed. See `.env.example` for the variables a live provider will use.
+| Command | What it does |
+| --- | --- |
+| `npm test` | Indicator and signal-engine tests |
+| `npm run typecheck` / `npm run lint` | Static checks |
+| `npm run build && npm start` | Production server on http://localhost:3000 |
+| `npm run build:pages` | Static export to `out/` for GitHub Pages (base path `/tradingbot`) |
+
+Pushes to `main` deploy automatically through `.github/workflows/pages.yml`. In the repository settings, Pages must use **GitHub Actions** as its source. The site is at https://pankqx.github.io/tradingbot/.
+
+Watchlists, saved filters and the theme are stored in your browser, so they are per device on the hosted site too.
 
 ## Docs
 

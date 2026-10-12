@@ -8,6 +8,8 @@ import { regimeLabel } from "@/lib/analytics/signals";
 import { getSnapshot, getUniverse } from "@/lib/data/universe";
 import { crore, OUTCOME_LABEL, price, shortDate, signedPct } from "@/lib/format";
 
+export const dynamicParams = false;
+
 export function generateStaticParams() {
   return getUniverse().snapshots.map((s) => ({ symbol: s.instrument.symbol }));
 }
